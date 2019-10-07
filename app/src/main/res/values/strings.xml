@@ -23,4 +23,9 @@
     <string name="menu_tools">Calendário</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="tipo_usuario">Escolha o Usuário</string>
+    <string-array name="tipo_de_usuario">
+        <item>Professor</item>
+        <item>Aluno</item>
+    </string-array>
 </resources>

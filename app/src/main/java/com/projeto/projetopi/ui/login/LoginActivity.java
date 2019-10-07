@@ -17,9 +17,12 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +31,10 @@ import com.projeto.projetopi.R;
 import com.projeto.projetopi.ui.login.LoginViewModel;
 import com.projeto.projetopi.ui.login.LoginViewModelFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private LoginViewModel loginViewModel;
+    private int tpUsuario;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,12 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        Spinner tipoUsuario = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_de_usuario, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tipoUsuario.setAdapter(adapter);
+        tipoUsuario.setOnItemSelectedListener(this);
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -125,11 +135,33 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+
+        // Enquanto não temos base ******
+        if (this.tpUsuario == 0){
+            //se for professor
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }else{
+            //se for aluno
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+        String text =  parent.getItemAtPosition(position).toString();
+        this.tpUsuario = parent.getSelectedItemPosition();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
