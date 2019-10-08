@@ -28,4 +28,5 @@
         <item>Professor</item>
         <item>Aluno</item>
     </string-array>
+    <string name="title_activity_professor_home">ProfessorHome</string>
 </resources>

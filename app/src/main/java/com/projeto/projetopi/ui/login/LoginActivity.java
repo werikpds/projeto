@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projeto.projetopi.HomeActivity;
+import com.projeto.projetopi.ProfessorHome;
 import com.projeto.projetopi.R;
 import com.projeto.projetopi.ui.login.LoginViewModel;
 import com.projeto.projetopi.ui.login.LoginViewModelFactory;
@@ -139,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         // Enquanto não temos base ******
         if (this.tpUsuario == 0){
             //se for professor
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, ProfessorHome.class);
             startActivity(intent);
         }else{
             //se for aluno
