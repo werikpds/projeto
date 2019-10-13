@@ -12,8 +12,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.projeto.projetopi.ui.login.LoginActivity;
-import com.projeto.projetopi.ui.share.ShareViewModel;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -99,6 +97,7 @@ public class ProfessorHome extends AppCompatActivity {
             case R.id.sair:
                 Intent intent2 = new Intent(this, LoginActivity.class);
                 startActivity(intent2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

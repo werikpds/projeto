@@ -10,9 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".HistoricoPresenca"
+            android:label="@string/title_activity_historico_presenca"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AlunoHome"
+            android:label="@string/title_activity_aluno_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ListaChamada"
             android:label="@string/title_activity_lista_chamada"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AlunosPresentes"
             android:label="@string/title_activity_alunos_presentes"
@@ -20,10 +28,6 @@
         <activity
             android:name=".ProfessorHome"
             android:label="@string/title_activity_professor_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.login.LoginActivity"

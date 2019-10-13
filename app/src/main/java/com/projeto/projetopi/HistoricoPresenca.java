@@ -14,29 +14,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ListaChamada extends AppCompatActivity {
+public class HistoricoPresenca extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_chamada);
+        setContentView(R.layout.activity_historico_presenca);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_lista_chamada, menu);
+        getMenuInflater().inflate(R.menu.historico_presenca, menu);
         return true;
     }
 
@@ -44,17 +35,13 @@ public class ListaChamada extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.alunos_presentes:
-                Intent intent = new Intent(this, AlunosPresentes.class);
+            case R.id.inicio:
+                Intent intent = new Intent(this, AlunoHome.class);
                 startActivity(intent);
                 return true;
-            case R.id.inicio:
-                Intent intent1 = new Intent(this, ProfessorHome.class);
-                startActivity(intent1);
-                return true;
             case R.id.sair:
-                Intent intent2 = new Intent(this, LoginActivity.class);
-                startActivity(intent2);
+                Intent intent1 = new Intent(this, LoginActivity.class);
+                startActivity(intent1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
