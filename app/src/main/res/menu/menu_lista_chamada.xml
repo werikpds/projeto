@@ -8,9 +8,9 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/lista_chamada"
+        android:id="@+id/inicio"
         android:orderInCategory="101"
-        android:title="Lista de Chamada"
+        android:title="Inicio"
         app:showAsAction="never"
         />
     <item

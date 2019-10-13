@@ -24,9 +24,11 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="tipo_usuario">Escolha o Usuário</string>
+    <string name="title_activity_professor_home">ProfessorHome</string>
+    <string name="title_activity_alunos_presentes">AlunosPresentes</string>
+    <string name="title_activity_lista_chamada">ListaChamada</string>
     <string-array name="tipo_de_usuario">
         <item>Professor</item>
         <item>Aluno</item>
     </string-array>
-    <string name="title_activity_professor_home">ProfessorHome</string>
 </resources>
