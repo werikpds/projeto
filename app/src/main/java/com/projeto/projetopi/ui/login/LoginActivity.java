@@ -27,11 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projeto.projetopi.AlunoHome;
-import com.projeto.projetopi.HomeActivity;
 import com.projeto.projetopi.ProfessorHome;
 import com.projeto.projetopi.R;
-import com.projeto.projetopi.ui.login.LoginViewModel;
-import com.projeto.projetopi.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
