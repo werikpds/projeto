@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.projeto.projetopi.AlunoHome;
 import com.projeto.projetopi.HomeActivity;
 import com.projeto.projetopi.ProfessorHome;
 import com.projeto.projetopi.R;
@@ -144,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             startActivity(intent);
         }else{
             //se for aluno
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, AlunoHome.class);
             startActivity(intent);
         }
 

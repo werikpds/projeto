@@ -27,6 +27,8 @@
     <string name="title_activity_professor_home">ProfessorHome</string>
     <string name="title_activity_alunos_presentes">AlunosPresentes</string>
     <string name="title_activity_lista_chamada">ListaChamada</string>
+    <string name="title_activity_aluno_home">AlunoHome</string>
+    <string name="title_activity_historico_presenca">HistoricoPresenca</string>
     <string-array name="tipo_de_usuario">
         <item>Professor</item>
         <item>Aluno</item>

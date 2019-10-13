@@ -55,6 +55,7 @@ public class AlunosPresentes extends AppCompatActivity {
             case R.id.sair:
                 Intent intent2 = new Intent(this, LoginActivity.class);
                 startActivity(intent2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
