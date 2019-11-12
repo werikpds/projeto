@@ -29,6 +29,10 @@
     <string name="title_activity_lista_chamada">ListaChamada</string>
     <string name="title_activity_aluno_home">AlunoHome</string>
     <string name="title_activity_historico_presenca">HistoricoPresenca</string>
+    <string name="host_address">10.0.2.2</string>
+    <string name="host_port">8080</string>
+    <string name="endpoint_base">usuarios</string>
+    <string name="endpoint_listar">logar</string>
     <string-array name="tipo_de_usuario">
         <item>Professor</item>
         <item>Aluno</item>

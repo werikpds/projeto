@@ -26,14 +26,30 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.projeto.projetopi.AlunoHome;
 import com.projeto.projetopi.ProfessorHome;
 import com.projeto.projetopi.R;
+import com.projeto.projetopi.Usuario;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private LoginViewModel loginViewModel;
     private int tpUsuario;
+    private RequestQueue requestQueue;
+    private Usuario usuario;
+    private JSONObject request;
+    private String log, senha;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoUsuario.setAdapter(adapter);
         tipoUsuario.setOnItemSelectedListener(this);
+        requestQueue = Volley.newRequestQueue(this);
 
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -123,6 +140,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                request = montaRequest(usernameEditText, passwordEditText);
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
@@ -134,13 +152,14 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-
+        logarUsuario();
+        System.out.println(usuario.toString() + "--------------------------------------------------------------------");
         // Enquanto não temos base ******
-        if (this.tpUsuario == 0){
+        if (this.tpUsuario == 0 && usuario.getTipo() == 0) {
             //se for professor
             Intent intent = new Intent(this, ProfessorHome.class);
             startActivity(intent);
-        }else{
+        } else if(this.tpUsuario == 1 && usuario.getTipo() == 1){
             //se for aluno
             Intent intent = new Intent(this, AlunoHome.class);
             startActivity(intent);
@@ -154,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-        String text =  parent.getItemAtPosition(position).toString();
+        String text = parent.getItemAtPosition(position).toString();
         this.tpUsuario = parent.getSelectedItemPosition();
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
     }
@@ -162,5 +181,64 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public String montaUrl(String... args) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : args) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+
+    public JSONObject montaRequest(EditText docu, EditText key){
+        JSONObject json = new JSONObject();
+        try {
+            json.put("doc", docu.getText().toString());
+            json.put("senha", key.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
+    }
+
+    public void logarUsuario() {
+        String url = montaUrl(
+                getString(R.string.host_address),
+                getString(R.string.host_port),
+                getString(R.string.endpoint_base),
+                getString(R.string.endpoint_listar)
+        );
+        requestQueue.add(new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                request,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            String doc = response.getString("ra");
+                            String senha = response.getString("senha");
+                            String nome = response.getString("nome");
+                            String email = response.getString("email");
+                            String cpf = response.getString("cpf");
+                            int tipo = response.getInt("tipo");
+                            int id = response.getInt( "id");
+                            usuario = new Usuario(id, nome, email, cpf, senha, doc, tipo);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }));
     }
 }
