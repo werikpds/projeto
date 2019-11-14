@@ -204,41 +204,41 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void logarUsuario() {
-        String url = montaUrl(
+        String url = "http://192.168.0.40:8080/usuarios/login"; /*montaUrl(
                 getString(R.string.host_address),
                 getString(R.string.host_port),
                 getString(R.string.endpoint_base),
-                getString(R.string.endpoint_listar)
-        );
-        requestQueue.add(new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                request,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+                getString(R.string.endpoint_listar)*/
 
-                        try {
-                            String doc = response.getString("ra");
-                            String senha = response.getString("senha");
-                            String nome = response.getString("nome");
-                            String email = response.getString("email");
-                            String cpf = response.getString("cpf");
-                            int tipo = response.getInt("tipo");
-                            int id = response.getInt( "id");
-                            usuario = new Usuario(id, nome, email, cpf, senha, doc, tipo);
+            requestQueue.add(new JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    request,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            try {
+                                String doc = response.getString("ra");
+                                String senha = response.getString("senha");
+                                String nome = response.getString("nome");
+                                String email = response.getString("email");
+                                String cpf = response.getString("cpf");
+                                int tipo = response.getInt("tipo");
+                                int id = response.getInt("id");
+                                usuario = new Usuario(id, nome, email, cpf, senha, doc, tipo);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                         }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }));
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                        }
+                    }));
     }
 }
